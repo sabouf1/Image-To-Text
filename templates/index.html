@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Flask Image Processor</h1>
+        <p class="lead">Upload an image (max size: 5MB) and see the extracted text!</p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form method="post" enctype="multipart/form-data" action="{{ url_for('upload') }}" class="mt-4">
+            <div class="form-group">
+                <input type="file" name="file" class="form-control-file" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        {% if filename %}
+        <h2 class="mt-4">Uploaded Image: {{ filename }}</h2>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" class="img-fluid">
+
+        <!-- Add a link to the shareable link page -->
+        <a href="{{ url_for('shareable_link', shareable_id=shareable_id) }}">Shareable Link</a>
+        {% endif %}
+
+        {% if text %}
+        <div class="result-box mt-4">
+            <h2>Extracted Text</h2>
+            <p>{{ text }}</p>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Welcome, Admin!</h1>
+    <h3>Uploaded Files:</h3>
+
+    <!-- Logout Form -->
+    <form method="post" action="{{ url_for('admin_logout') }}">
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+
+    <!-- File Delete Form -->
+    <form method="post" action="{{ url_for('delete_files') }}">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for filename in uploads %}
+                <tr>
+                    <td>{{ filename }}</td>
+                    <td>
+                        <button type="submit" name="file_to_delete" value="{{ filename }}" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-danger">Delete Selected Files</button>
+    </form>
+</div>
+{% endblock %}

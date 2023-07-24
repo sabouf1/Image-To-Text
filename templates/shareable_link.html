@@ -1,0 +1,46 @@
+<!-- shareable_link.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shareable Link - Flask Image Processor</title>
+
+    <!-- Add necessary CSS links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            max-height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .extracted-text {
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Processed Image</h1>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='uploads/' + data['filename']) }}" alt="Processed Image">
+        </div>
+        <h2 class="extracted-text">Extracted Text</h2>
+        <p>{{ data['text'] }}</p>
+    </div>
+</body>
+</html>
